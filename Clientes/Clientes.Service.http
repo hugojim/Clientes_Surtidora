@@ -1,0 +1,5 @@
+﻿@Clientes.Service_HostAddress = http://localhost:5123
+
+GET {{Clientes.Service_HostAddress}}/api/clientes
+
+###
