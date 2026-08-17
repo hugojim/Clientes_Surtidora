@@ -12,26 +12,27 @@ namespace Clientes.BusinessLogic.Common
         public static async Task<DataCollection<T>> GetPagedAsync<T>(
             this IQueryable<T> query,
             int page,
-            int take
-            )
+            int take)
         {
-            var originalPages = page;
-            page--;
-            if (page > 0) { page = page * take; }
+            page = page < 1 ? 1 : page;
+            take = take < 1 ? 10 : take;
 
-            var result = new DataCollection<T>
+            var total = await query.CountAsync();
+
+            var items = await query
+                .Skip((page - 1) * take)
+                .Take(take)
+                .ToListAsync();
+
+            return new DataCollection<T>
             {
-                Items = await query.Skip(page).Take(take).ToListAsync(),
-                Total = await query.CountAsync(),
-                Page = originalPages
+                Items = items,
+                Total = total,
+                Page = page,
+                PageSize = take,
+                Pages = (int)Math.Ceiling(
+                    total / (double)take)
             };
-
-            if (result.Total > 0)
-            {
-                result.Pages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(result.Total) / take));
-            }
-
-            return result;
         }
     }
 }

@@ -10,7 +10,12 @@ namespace Clientes.BusinessLogic.Interfaces
 {
     public interface IClienteQueryService
     {
-        Task<DataCollection<ClienteDto>> GetAllAsync(int page, int take);
+        Task<DataCollection<ClienteDto>> GetAllAsync(int pagina,
+    int tamanioPagina,
+    string? busqueda = null,
+    bool? activo = null,
+    string? ordenarPor = null,
+    string? direccion = null);
 
         Task<ClienteDto> GetAsync(int id);
     }

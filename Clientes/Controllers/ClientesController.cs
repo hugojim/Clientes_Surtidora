@@ -25,9 +25,20 @@ namespace Clientes.Service.Controllers
 
         //Clientes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClienteDto>>> ObtenerListaClientes(int pagina = 1, int tamanioPagina = 10)
+        public async Task<ActionResult<DataCollection<ClienteDto>>> ObtenerListaClientes(int pagina = 1,
+            int tamanioPagina = 10,
+              string? busqueda = null,
+    bool? activo = null,
+    string? ordenarPor = null,
+    string? direccion = null)
         {
-            var clientes = await _clienteQueryService.GetAllAsync(pagina, tamanioPagina);
+            var clientes = await _clienteQueryService.GetAllAsync(
+                pagina,
+        tamanioPagina,
+        busqueda,
+        activo,
+        ordenarPor,
+        direccion);
             return Ok(clientes);
         }
 
