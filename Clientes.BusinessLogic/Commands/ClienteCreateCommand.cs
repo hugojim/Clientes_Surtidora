@@ -19,7 +19,7 @@ namespace Clientes.BusinessLogic.Commands
         public string ApellidoPaterno { get; set; } = null!;
         
         [MaxLength(100)]
-        public string? ApellidoMaterno { get; set; }
+        public string? ApellidoMaterno { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress(ErrorMessage = "Correo electronico invalido")]
@@ -27,15 +27,15 @@ namespace Clientes.BusinessLogic.Commands
         public string CorreoElectronico { get; set; } = null!;
         [Phone]
         [MaxLength(20)]
-        public string? Telefono { get; set; }
+        public string? Telefono { get; set; } = string.Empty;
 
-        public DateOnly? FechaNacimiento { get; set; }
+        public DateOnly? FechaNacimiento { get; set; } = DateOnly.MinValue;
         [MaxLength(250)]
-        public string? Direccion { get; set; }
+        public string? Direccion { get; set; } = string.Empty;
         [MaxLength(100)]
-        public string Ciudad { get; set; } = null!;
+        public string Ciudad { get; set; } = string.Empty;
         [MaxLength(10)]
-        public string? CodigoPostal { get; set; }
+        public string? CodigoPostal { get; set; } = string.Empty;
 
     }
 }

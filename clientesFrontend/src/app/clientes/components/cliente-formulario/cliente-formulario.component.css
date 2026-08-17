@@ -1,0 +1,349 @@
+.page-container {
+  min-height: 100vh;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  background: #f5f6f8;
+}
+
+
+/* CARD */
+
+.cliente-card {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, .06);
+}
+
+
+/* HEADER */
+
+.card-header {
+  min-height: 36px;
+
+  padding: 7px 14px;
+
+  gap: 7px;
+}
+
+.header-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.header-text {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.header-icon mat-icon {
+  font-size: 17px;
+}
+
+.card-header h1 {
+  margin: 0;
+
+  font-size: 18px;
+  line-height: 20px;
+
+  font-weight: 600;
+
+  color: #202124;
+}
+
+.header-text span::before {
+  content: "•";
+  margin-right: 8px;
+  color: #b0b5bd;
+}
+
+.card-header span {
+  font-size: 11px;
+  line-height: 20px;
+
+  color: #757575;
+}
+
+/* CONTENT */
+
+mat-card-content {
+  padding: 16px 20px 20px;
+}
+
+
+/* TITULOS */
+
+.section-title {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin: 4px 0 10px;
+
+  color: #3f51b5;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.section-title mat-icon {
+  width: 18px;
+  height: 18px;
+
+  font-size: 18px;
+}
+
+
+/* GRID */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  column-gap: 10px;
+  row-gap: 8px;
+
+  margin-bottom: 8px;
+}
+
+::ng-deep .form-grid .mat-mdc-form-field-subscript-wrapper {
+  min-height: 18px;
+}
+
+::ng-deep .form-grid .mat-mdc-form-field-error {
+  font-size: 10px;
+  line-height: 14px;
+}
+/* CAMPOS */
+
+mat-form-field {
+  width: 100%;
+}
+
+
+/* 2 COLUMNAS */
+
+.span-2 {
+  grid-column: span 2;
+}
+
+
+/* REDUCIR ESPACIO */
+
+::ng-deep .mat-mdc-form-field {
+  margin-bottom: -4px;
+}
+
+
+/* BOTONES */
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  margin-top: 8px;
+}
+
+.form-actions button {
+  height: 38px;
+
+  min-width: 100px;
+
+  border-radius: 7px;
+}
+
+.form-actions mat-icon {
+  font-size: 18px;
+
+  width: 18px;
+  height: 18px;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 850px) {
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+}
+
+
+/* =========================================
+   CELULAR
+   ========================================= */
+
+@media (max-width: 550px) {
+
+  .page-container {
+    padding: 8px;
+  }
+
+  mat-card-content {
+    padding: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .span-2 {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px 12px;
+  margin-bottom: 8px;
+}
+
+/* =========================================
+   INPUTS COMPACTOS
+   ========================================= */
+
+.form-grid mat-form-field {
+  width: 100%;
+}
+
+/* Reduce la altura del campo */
+::ng-deep .form-grid .mat-mdc-form-field-flex {
+  height: 42px;
+}
+
+/* Centra el contenido */
+::ng-deep .form-grid .mat-mdc-text-field-wrapper {
+  height: 42px;
+}
+
+/* Input más pequeño */
+::ng-deep .form-grid .mat-mdc-form-field-infix {
+  min-height: 42px;
+  padding-top: 9px !important;
+  padding-bottom: 7px !important;
+}
+
+/* Texto del input */
+::ng-deep .form-grid input.mat-mdc-input-element {
+  font-size: 13px;
+}
+
+/* Label */
+::ng-deep .form-grid .mdc-floating-label {
+  font-size: 13px;
+}
+
+/* Label cuando está arriba */
+::ng-deep
+.form-grid
+.mdc-text-field--outlined
+.mdc-floating-label--float-above {
+  font-size: 11px;
+}
+
+/* Iconos */
+::ng-deep .form-grid .mat-mdc-form-field-icon-suffix mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+
+/* =========================================
+   ERRORES MÁS COMPACTOS
+   ========================================= */
+
+::ng-deep .form-grid .mat-mdc-form-field-subscript-wrapper {
+  height: 16px;
+}
+
+::ng-deep .form-grid .mat-mdc-form-field-error {
+  font-size: 10px;
+}
+
+
+/* =========================================
+   GRID
+   ========================================= */
+
+.span-2 {
+  grid-column: span 2;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 550px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .span-2 {
+    grid-column: auto;
+  }
+}
+::ng-deep .form-grid .mat-mdc-input-element {
+  font-size: 12px !important;
+}
+
+::ng-deep .form-grid .mat-mdc-floating-label {
+  font-size: 12px !important;
+}
+
+.activo-field {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+
+  border: 1px solid #d5d8dc;
+  border-radius: 4px;
+
+  box-sizing: border-box;
+  background: #fff;
+}

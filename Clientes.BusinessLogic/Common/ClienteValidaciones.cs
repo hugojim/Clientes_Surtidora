@@ -35,7 +35,7 @@ namespace Clientes.BusinessLogic.Common
 
         //Fecha nacimiento futura
 
-        public static bool EsFechaNacimientoFutura(DateOnly fechaNacimiento)
+        public static bool EsFechaNacimientoFutura(DateOnly? fechaNacimiento)
         {
             var hoy = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 

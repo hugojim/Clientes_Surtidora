@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Cliente } from '../models/cliente';
 import { ResponseAPI } from '../models/ResponseAPI';
+import { ClienteRequest } from '../models/ClienteRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,10 @@ export class ClientesService {
   }
   public crearCliente(objeto:Cliente)
   {
+    console.log(objeto)
      return this.http.post<ResponseAPI>(this.URLbase,objeto);
   } 
-public editarCliente(objeto:Cliente,id: number)
+public editarCliente(objeto:ClienteRequest ,id: number)
   {
      return this.http.put<ResponseAPI>(`${this.URLbase}/${id}`,objeto);
   } 

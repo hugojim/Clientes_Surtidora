@@ -5,7 +5,6 @@ namespace Clientes.BusinessLogic.DTOs
 {
     public class ClienteDto
     {
-
         public int ClienteId { get; set; }
 
         [Required]
@@ -24,7 +23,6 @@ namespace Clientes.BusinessLogic.DTOs
         [MaxLength(200)]
         public string CorreoElectronico { get; set; } = null!;
 
-        [Phone]
         [MaxLength(20)]
         public string? Telefono { get; set; }
 

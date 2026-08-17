@@ -24,20 +24,23 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cli
 
 var origenesPermitidos = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(",");
 
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Angular", policy =>
     {
         policy
-            .WithOrigins("origenesPermitidos")
+            .WithOrigins(origenesPermitidos)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseRouting();
 
 app.UseCors("Angular");
 

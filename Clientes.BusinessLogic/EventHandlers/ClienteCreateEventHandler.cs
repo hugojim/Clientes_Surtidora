@@ -1,4 +1,5 @@
 ﻿using Clientes.BusinessLogic.Commands;
+using Clientes.BusinessLogic.Common;
 using Clientes.DataAccess;
 using Clientes.DataAccess.Entidades;
 using MediatR;
@@ -33,6 +34,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
             {
                 throw new DuplicateNameException("Correo Duplicado"); // 409
             }
+            if(ClienteValidaciones.EsFechaNacimientoFutura(clienteCommand.FechaNacimiento))
 
             await _context.Clientes.AddAsync(new Cliente
             {

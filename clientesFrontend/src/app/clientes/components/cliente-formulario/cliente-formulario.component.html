@@ -1,1 +1,172 @@
-<p>cliente-formulario works!</p>
+<div class="page-container">
+
+  <mat-card class="cliente-card">
+
+    <!-- HEADER -->
+   <div class="card-header">
+
+    <div class="header-icon">
+      <mat-icon>person</mat-icon>
+    </div>
+
+    <div class="header-text">
+      <h1>Cliente</h1>
+      <span>Información del cliente</span>
+    </div>
+
+</div>
+
+
+    <mat-divider></mat-divider>
+
+
+    <mat-card-content>
+
+      <form [formGroup]="formCliente"  (ngSubmit)="guardarCliente()">
+
+        <!-- DATOS PERSONALES -->
+        <div class="section-title">
+          <mat-icon>badge</mat-icon>
+          <span>Datos personales</span>
+        </div>
+
+        <div class="form-grid">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+            <mat-icon matSuffix>person</mat-icon>
+
+            @if (formCliente.get('nombre')?.hasError('required')) {
+              <mat-error>Campo requerido</mat-error>
+            }
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido paterno</mat-label>
+            <input matInput formControlName="apellidoPaterno">
+            <mat-icon matSuffix>person_outline</mat-icon>
+
+            @if (formCliente.get('apellidoPaterno')?.hasError('required')) {
+              <mat-error>Campo requerido</mat-error>
+            }
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido materno</mat-label>
+            <input matInput formControlName="apellidoMaterno">
+            <mat-icon matSuffix>person_outline</mat-icon>
+          </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput   [matDatepicker]="pickerNacimiento"   formControlName="fechaNacimiento" >
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="pickerNacimiento">
+            </mat-datepicker-toggle>
+            <mat-datepicker #pickerNacimiento></mat-datepicker>
+          </mat-form-field>
+
+
+          <!-- CONTACTO -->
+          <mat-form-field appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input  matInput  type="email"  formControlName="correoElectronico">
+            <mat-icon matSuffix>email</mat-icon>
+             @if (formCliente.get('correoElectronico')?.hasError('required')) {
+
+    <mat-error>
+      El correo electrónico es obligatorio
+    </mat-error>
+
+  }
+
+  @if (
+    formCliente.get('correoElectronico')?.hasError('email') &&
+    !formCliente.get('correoElectronico')?.hasError('required')
+  ) {
+
+    <mat-error>
+      Ingresa un correo electrónico válido
+    </mat-error>
+
+  }
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input
+              matInput
+              type="tel"
+              formControlName="telefono">
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+
+        </div>
+
+        <div class="section-title">
+          <mat-icon>home</mat-icon>
+          <span>Domicilio</span>
+        </div>
+
+        <div class="form-grid">
+
+          <mat-form-field
+            appearance="outline"
+            class="span-2">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion">
+            <mat-icon matSuffix>home</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Ciudad</mat-label>
+            <input matInput formControlName="ciudad">
+            <mat-icon matSuffix>location_city</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Código postal</mat-label>
+            <input matInput formControlName="codigoPostal"maxlength="5">
+            <mat-icon matSuffix>markunread_mailbox</mat-icon>
+          </mat-form-field>
+
+          <mat-slide-toggle formControlName="activo" color="primary">
+                {{ formCliente.get('activo')?.value ? 'Activo' : 'Inactivo' }}
+              </mat-slide-toggle>
+        </div>
+
+         <div class="form-grid">
+        <mat-form-field appearance="outline">
+  <mat-label>Fecha de registro</mat-label>
+  <input matInput [value]="formatFecha(formCliente.get('fechaRegistro')?.value)"
+    readonly>
+</mat-form-field>
+      <mat-form-field appearance="outline">
+  <mat-label>Fecha de Modificación</mat-label>
+  <input matInput [value]="formatFecha(formCliente.get('fechaModificacion')?.value)"
+    readonly>
+</mat-form-field>
+
+</div>
+
+
+        <div class="form-actions">
+
+          <button mat-stroked-button type="button" (click)="volver()"> Cancelar</button>
+
+            <button mat-flat-button color="primary"  type="submit">
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</div>
