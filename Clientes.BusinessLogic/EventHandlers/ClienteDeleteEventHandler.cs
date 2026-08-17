@@ -21,7 +21,10 @@ namespace Clientes.BusinessLogic.EvenHandlers
 
         public async Task Handle(ClienteDeleteCommand clienteCommand, CancellationToken cancellationToken)
         {
-            var clienteEliminar = await _context.Clientes.FindAsync(clienteCommand.ClienteId);
+            var clienteEliminar = await _context.Clientes
+                 .AsNoTracking()
+                .Where(x=> x.ClienteId ==  clienteCommand.ClienteId)
+                .FirstOrDefaultAsync();
 
             if (clienteEliminar == null)
             {                

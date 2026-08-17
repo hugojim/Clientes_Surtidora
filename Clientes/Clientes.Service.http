@@ -3,3 +3,30 @@
 GET {{Clientes.Service_HostAddress}}/api/clientes
 
 ###
+
+GET {{Clientes.Service_HostAddress}}/api/clientes/5
+
+###
+
+POST {{Clientes.Service_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+    "nombre": "Laurasds",
+  "apellidoPaterno": "Martísanez",
+  "apellidoMaterno": "Gómez",
+  "correoElectronico": "laura.ez@correo.com",
+  "telefono": "3312345678",
+  "fechaNacimiento": "1990-05-18T00:00:00",
+  "direccion": "Av. Vallarta 1500",
+  "ciudad": "Guadalajara",
+  "codigoPostal": "44110"
+}
+
+###
+
+DELETE {{Clientes.Service_HostAddress}}/api/clientes/{id}
+
+###
+
+

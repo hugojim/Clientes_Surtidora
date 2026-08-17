@@ -1,0 +1,12 @@
+<h2> prueba de cweb api</h2>
+
+
+@for (cliente of clientes; track $index){
+  <div>
+  <div>Nombre :{{cliente.nombre}}</div>
+  <div>activo :{{cliente.activo}}</div>
+  </div>
+}  
+
+
+  <router-outlet/>

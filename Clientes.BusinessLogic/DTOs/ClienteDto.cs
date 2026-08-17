@@ -7,15 +7,15 @@ namespace Clientes.BusinessLogic.DTOs
     {
 
         public int ClienteId { get; set; }
-        
+
         [Required]
         [MaxLength(100)]
         public string Nombre { get; set; } = null!;
-        
+
         [Required]
         [MaxLength(100)]
         public string ApellidoPaterno { get; set; } = null!;
-        
+
         [MaxLength(100)]
         public string? ApellidoMaterno { get; set; }
 
@@ -29,10 +29,10 @@ namespace Clientes.BusinessLogic.DTOs
         public string? Telefono { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
-        
+
         [MaxLength(250)]
         public string? Direccion { get; set; }
-        
+
         [MaxLength(100)]
         public string Ciudad { get; set; } = null!;
         [MaxLength(10)]
@@ -43,6 +43,9 @@ namespace Clientes.BusinessLogic.DTOs
         public DateTime FechaRegistro { get; set; }
 
         public DateTime? FechaModificacion { get; set; }
+
+        public string NombreCompleto =>
+      $"{Nombre} {ApellidoPaterno} {ApellidoMaterno}".Trim();
 
 
     }

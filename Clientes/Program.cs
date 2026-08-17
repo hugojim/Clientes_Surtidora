@@ -22,11 +22,16 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cli
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ClienteDeleteEventHandler).GetTypeInfo().Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ClienteUpdateEventHandler).GetTypeInfo().Assembly));
 
+var origenesPermitidos = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(",");
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Publica", app =>
+    options.AddPolicy("Angular", policy =>
     {
-        app.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        policy
+            .WithOrigins("origenesPermitidos")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
@@ -34,11 +39,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.useSwagger();
-
-//}
+app.UseCors("Angular");
 
 app.UseAuthorization();
 

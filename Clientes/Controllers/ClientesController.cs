@@ -25,7 +25,7 @@ namespace Clientes.Service.Controllers
 
         //Clientes
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pagina = 1, int tamanioPagina = 10)
+        public async Task<ActionResult<IEnumerable<ClienteDto>>> ObtenerListaClientes(int pagina = 1, int tamanioPagina = 10)
         {
             var clientes = await _clienteQueryService.GetAllAsync(pagina, tamanioPagina);
             return Ok(clientes);
@@ -33,7 +33,7 @@ namespace Clientes.Service.Controllers
 
         //Clientes/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int? id)
+        public async Task<ActionResult<ClienteDto>> ObtenerCliente(int? id)
         {
             if (id == 0 || id is null)
             {
@@ -45,15 +45,15 @@ namespace Clientes.Service.Controllers
 
         //Clientes
         [HttpPost]
-        public async Task<IActionResult> Create(ClienteCreateCommand clienteCommand)
+        public async Task<ActionResult> Crear(ClienteCreateCommand clienteCommand)
         {
-            await _mediator.Publish(clienteCommand);
+           await _mediator.Publish(clienteCommand);
             return Created();
         }
 
         //Clientes/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int? id, [FromBody] ClienteDto clienteDto)
+        public async Task<IActionResult> Actualizar(int? id, [FromBody] ClienteDto clienteDto)
         {
 
             if (id == 0 || id is null)
@@ -70,7 +70,7 @@ namespace Clientes.Service.Controllers
 
         //Clientes/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Eliminar(int? id)
         {
             if (id == 0 || id is null)
             {

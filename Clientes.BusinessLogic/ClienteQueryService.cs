@@ -19,8 +19,9 @@ namespace Clientes.BusinessLogic
         public async Task<DataCollection<ClienteDto>> GetAllAsync(int page, int take)
         {
             var collection = await _clientesDbContext.Clientes
-                    .Where(x => x.Activo.Equals(true))
-                    .OrderByDescending(x => x.ClienteId).GetPagedAsync(page, take);
+                .AsNoTracking()
+                .Where(x => x.Activo.Equals(true))
+                .OrderByDescending(x => x.ClienteId).GetPagedAsync(page, take);
 
             return collection.MapTo<DataCollection<ClienteDto>>();
 
@@ -28,7 +29,10 @@ namespace Clientes.BusinessLogic
 
         public async Task<ClienteDto> GetAsync(int id)
         {
-            var clienteRetornar= await _clientesDbContext.Clientes.FindAsync(id);
+            var clienteRetornar = await _clientesDbContext.Clientes
+                .AsNoTracking()
+                .Where(x => x.ClienteId == id)
+                .FirstOrDefaultAsync();
 
             if (clienteRetornar == null)
             {

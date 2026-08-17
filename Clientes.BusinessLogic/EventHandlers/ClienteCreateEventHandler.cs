@@ -26,7 +26,8 @@ namespace Clientes.BusinessLogic.EvenHandlers
 
         public async Task Handle(ClienteCreateCommand clienteCommand, CancellationToken cancellationToken)
         {
-            var correoDuplicado = await _context.Clientes.
+            var correoDuplicado = await _context.Clientes
+                 .AsNoTracking().
                   SingleOrDefaultAsync(x => x.CorreoElectronico == clienteCommand.CorreoElectronico);
             if (correoDuplicado != null)
             {

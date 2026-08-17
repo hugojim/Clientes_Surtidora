@@ -22,30 +22,35 @@ namespace Clientes.BusinessLogic.EvenHandlers
 
         public async Task Handle(ClienteUpdateCommand clienteCommand, CancellationToken cancellationToken)
         {
-            var clienteActualizar = await _context.Clientes.FindAsync(clienteCommand.ClienteId);
+            var clienteActualizar = await _context.Clientes
+                .AsNoTracking()
+                .Where(x => x.ClienteId == clienteCommand.ClienteId)
+                .FirstOrDefaultAsync();
 
             if (clienteActualizar == null)
             {
                 throw new MissingFieldException("No se encontro el cliente a actualizar");
             }
 
-            var correoDuplicado = await _context.Clientes.
-                SingleOrDefaultAsync( x=> x.CorreoElectronico == clienteCommand.CorreoElectronico 
-                            && x.ClienteId != clienteCommand.ClienteId);
+            var correoDuplicado = await _context.Clientes
+              .AsNoTracking()
+                .Where(x => x.CorreoElectronico == clienteCommand.CorreoElectronico
+                            && x.ClienteId != clienteCommand.ClienteId).FirstOrDefaultAsync();
+
             if (correoDuplicado != null)
             {
                 throw new DuplicateNameException("Correo Duplicado"); // 409
             }
 
             clienteActualizar.Nombre = clienteCommand.Nombre;
-                clienteActualizar.ApellidoPaterno = clienteCommand.ApellidoPaterno;
-                clienteActualizar.ApellidoMaterno = clienteCommand.ApellidoMaterno;
-                clienteActualizar.CorreoElectronico = clienteCommand.CorreoElectronico;
-                clienteActualizar.Telefono = clienteCommand.Telefono;
-                clienteActualizar.FechaNacimiento = clienteCommand.FechaNacimiento;
-                clienteActualizar.Direccion = clienteCommand.Direccion;
-                clienteActualizar.Ciudad = clienteCommand.Ciudad;
-                clienteActualizar.CodigoPostal = clienteCommand.CodigoPostal;
+            clienteActualizar.ApellidoPaterno = clienteCommand.ApellidoPaterno;
+            clienteActualizar.ApellidoMaterno = clienteCommand.ApellidoMaterno;
+            clienteActualizar.CorreoElectronico = clienteCommand.CorreoElectronico;
+            clienteActualizar.Telefono = clienteCommand.Telefono;
+            clienteActualizar.FechaNacimiento = clienteCommand.FechaNacimiento;
+            clienteActualizar.Direccion = clienteCommand.Direccion;
+            clienteActualizar.Ciudad = clienteCommand.Ciudad;
+            clienteActualizar.CodigoPostal = clienteCommand.CodigoPostal;
             clienteActualizar.Activo = clienteCommand.Activo;
             clienteActualizar.FechaModificacion = DateTime.Now;
 
