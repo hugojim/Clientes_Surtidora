@@ -1,10 +1,11 @@
 using Clientes.BusinessLogic;
+using Clientes.BusinessLogic.EvenHandlers;
 using Clientes.BusinessLogic.Interfaces;
 using Clientes.DataAccess.Entidades;
-using Microsoft.EntityFrameworkCore;
+using Clientes.Service.ExcepcionesGlobales;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using Clientes.BusinessLogic.EvenHandlers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ClientesDbContext>(opts =>
 opts.UseSqlServer(builder.Configuration.GetConnectionString("SQLConnection")));  
 builder.Services.AddScoped<IClienteQueryService, ClienteQueryService>();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ClienteCreateEventHandler).GetTypeInfo().Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ClienteDeleteEventHandler).GetTypeInfo().Assembly));
@@ -41,7 +45,9 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseRouting();
+app.UseExceptionHandler();
 
+app.UseHttpsRedirection();
 app.UseCors("Angular");
 
 app.UseAuthorization();

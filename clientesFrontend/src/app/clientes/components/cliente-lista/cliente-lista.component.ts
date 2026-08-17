@@ -56,13 +56,9 @@ if(confirm("Desea eliminar el Cliente "))
 {
   this.clientesService.eliminarCliente(objeto.clienteId).subscribe({
     next:(data)=>{
-      if(data.isSuccess){
+   
         this.obtenerClientes();
-      }
-      else
-      {
-        alert:"No se puede eliminar el cliente"
-      }
+    
     },
     error:(err)=>{
   console.log(err.message);

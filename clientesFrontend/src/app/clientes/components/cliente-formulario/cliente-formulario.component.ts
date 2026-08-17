@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { Cliente } from '../../models/cliente';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ErrorResponse } from '../../models/ErrorResponse';
 
 @Component({
   selector: 'app-cliente-formulario',
@@ -21,7 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
   imports: [MatFormFieldModule,MatButtonModule,MatDatepickerModule,
     MatSlideToggleModule,MatIconModule,MatDividerModule,MatNativeDateModule,
-    MatInputModule, MatCardModule,ReactiveFormsModule],
+    MatInputModule, MatCardModule,ReactiveFormsModule ],
   templateUrl: './cliente-formulario.component.html',
   styleUrl: './cliente-formulario.component.css',
 })
@@ -93,6 +94,8 @@ guardarCliente(){
 
     return;
   }
+
+  console.log(this.formCliente.value.fechaNacimiento);
   const objeto:Cliente ={
     clienteId :this.clienteId,
     nombre :  this.formCliente.value.nombre,    
@@ -105,9 +108,9 @@ ciudad: this.formCliente.value.ciudad,
 codigoPostal:this.formCliente.value.codigoPostal,
 direccion:this.formCliente.value.direccion,
 fechaModificacion:this.formCliente.value.fechaModificacion,
-//  fechaNacimiento: this.formCliente.value.fechaNacimiento,
-       fechaNacimiento: this.formCliente.value.fechaNacimiento ? this.formCliente.value.fechaNacimiento.toISOString().substring(0, 10)
-       : null ,
+ fechaNacimiento: this.formCliente.value.fechaNacimiento,
+      //  fechaNacimiento: this.formCliente.value.fechaNacimiento ? this.formatDate(this.formCliente.value.fechaNacimiento)
+      //  : "" ,
        fechaRegistro:this.formCliente.value.fechaRegistro,
 nombreCompleto:this.formCliente.value.nombreCompleto
 
@@ -118,18 +121,40 @@ console.log(objeto)
   this.clientesService.crearCliente(objeto).subscribe({
     next:(data)=>{
       console.log(data)
-      if(data.isSuccess){ this.router.navigate(["/"]);}
-      else{alert("Error al crear el cliente")}
-     }
+       this.router.navigate(["/"]);
+     
+     },
+      error: (error) => {
+
+        console.log('Error completo:', error);
+
+        const errorResponse = error.error as ErrorResponse;
+
+        console.log('Código:', errorResponse.codigoEstado);
+        console.log('Título:', errorResponse.titulo);
+        console.log('Mensaje:', errorResponse.mensaje);
+
+      }
+     
   })
   }
   else{
   this.clientesService.editarCliente(objeto,this.clienteId).subscribe({
     next:(data)=>{
-      if(data.isSuccess){
-			this.router.navigate(["/"]);
-      }
-      else{alert("Error al crear el cliente")}
+      console.log(data)
+    			this.router.navigate(["/"]);
+      
+      },
+      error: (error) => {
+
+        console.log('Error completo:', error);
+
+        const errorResponse = error.error as ErrorResponse;
+
+        console.log('Código:', errorResponse.codigoEstado);
+        console.log('Título:', errorResponse.titulo);
+        console.log('Mensaje:', errorResponse.mensaje);
+
       }
 	  })
   }

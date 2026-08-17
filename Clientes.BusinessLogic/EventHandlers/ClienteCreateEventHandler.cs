@@ -32,12 +32,9 @@ namespace Clientes.BusinessLogic.EvenHandlers
                   SingleOrDefaultAsync(x => x.CorreoElectronico == clienteCommand.CorreoElectronico);
             if (correoDuplicado != null)
             {
-                throw new DuplicateNameException("Correo Duplicado"); // 409
+                throw new CorreoDuplicadoException("Correo Duplicado"); // 409
             }
-            if (ClienteValidaciones.EsFechaNacimientoFutura(clienteCommand.FechaNacimiento))
-            {
-                throw new InvalidDataException("Fecha nacimiento no valida");
-            }
+           
 
             await _context.Clientes.AddAsync(new Cliente
             {
@@ -46,7 +43,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
                 ApellidoMaterno = clienteCommand.ApellidoMaterno,
                 CorreoElectronico = clienteCommand.CorreoElectronico,
                 Telefono = clienteCommand.Telefono,
-                FechaNacimiento = clienteCommand.FechaNacimiento,
+                FechaNacimiento = DateOnly.FromDateTime(clienteCommand.FechaNacimiento),
                 Direccion = clienteCommand.Direccion,
                 Ciudad = clienteCommand.Ciudad,
                 CodigoPostal = clienteCommand.CodigoPostal,

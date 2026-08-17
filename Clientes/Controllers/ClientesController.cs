@@ -37,7 +37,7 @@ namespace Clientes.Service.Controllers
         {
             if (id == 0 || id is null)
             {
-                return BadRequest("Cliente ID invalido");
+                throw new InvalidDataException("Cliente ID invalido");
             }
 
             return Ok(await _clienteQueryService.GetAsync(id.Value));
@@ -47,7 +47,12 @@ namespace Clientes.Service.Controllers
         [HttpPost]
         public async Task<ActionResult> Crear(ClienteCreateCommand clienteCommand)
         {
-           await _mediator.Publish(clienteCommand);
+            if (clienteCommand.FechaNacimiento >= DateTime.Now)
+            {
+                throw new InvalidDataException("Fecha nacimiento no valida");
+            }
+
+            await _mediator.Publish(clienteCommand);
             return Created();
         }
 
@@ -58,13 +63,19 @@ namespace Clientes.Service.Controllers
 
             if (id == 0 || id is null)
             {
-                return BadRequest("Cliente Id Invalido");
+                throw new InvalidDataException("Cliente Id Invalido");
+            }
+            if (clienteDto.FechaNacimiento >= DateTime.Now)
+            {
+                throw new InvalidDataException("Fecha nacimiento no valida");
             }
             ClienteUpdateCommand clienteUpdateCommand = clienteDto.MapTo<ClienteUpdateCommand>();
             clienteUpdateCommand.ClienteId = id.Value;
             await _mediator.Publish(clienteUpdateCommand);
 
             return Ok();
+
+
         }
 
 
@@ -74,7 +85,7 @@ namespace Clientes.Service.Controllers
         {
             if (id == 0 || id is null)
             {
-                return BadRequest("Cliente Id Invalido");
+                throw new InvalidDataException("Cliente Id Invalido");
             }
             await _mediator.Publish(new ClienteDeleteCommand { ClienteId = id.Value });
             return NoContent();

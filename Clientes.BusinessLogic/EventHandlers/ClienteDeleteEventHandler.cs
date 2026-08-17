@@ -1,4 +1,5 @@
 ﻿using Clientes.BusinessLogic.Commands;
+using Clientes.BusinessLogic.Common;
 using Clientes.DataAccess.Entidades;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,8 +28,8 @@ namespace Clientes.BusinessLogic.EvenHandlers
                 .FirstOrDefaultAsync();
 
             if (clienteEliminar == null)
-            {                
-                throw new MissingFieldException("No se encontro el cliente a eliminar" );
+            {
+                throw new ClienteNoEncontradoException("No se encontro el cliente a eliminar");
             }
 
             clienteEliminar.Activo = false;

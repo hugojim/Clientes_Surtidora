@@ -1,0 +1,154 @@
+/* Contenedor general */
+.page-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 25px auto;
+}
+
+
+/* Card del encabezado */
+.header-card {
+  margin-bottom: 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header */
+.header-card mat-card-header {
+  padding: 14px 20px 8px;
+}
+
+
+.header-card mat-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+
+/* Contenido del header */
+.header-card mat-card-content {
+  padding: 8px 20px 16px;
+}
+
+
+/* Botón nuevo */
+.header-card button {
+  height: 30px;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.header-card button mat-icon {
+  font-size: 17px;
+  width: 17px;
+  height: 17px;
+}
+
+/* Card de la tabla */
+.table-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Elimina espacio innecesario del contenido */
+.table-card mat-card-content {
+  padding: 0;
+}
+
+
+/* Contenedor de tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
+/* Tabla */
+.clientes-table {
+  width: 100%;
+}
+
+
+/* Encabezado */
+.clientes-table th {
+  background-color: #f5f7fa;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  height: 44px;
+}
+
+
+/* Celdas */
+.clientes-table td {
+  font-size: 13px;
+  color: #4b5563;
+  height: 46px;
+}
+
+
+/* Hover */
+.clientes-table tr.mat-mdc-row:hover {
+  background-color: #f8fafc;
+}
+
+
+/* Bordes suaves */
+.clientes-table th,
+.clientes-table td {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* Columna ID */
+.clientes-table th:first-child,
+.clientes-table td:first-child {
+  width: 70px;
+}
+
+
+/* Columna acciones */
+.clientes-table th:last-child,
+.clientes-table td:last-child {
+  width: 110px;
+  text-align: center;
+}
+
+
+/* Botones de acciones */
+.clientes-table button {
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+}
+
+
+.clientes-table button mat-icon {
+  font-size: 19px;
+  width: 19px;
+  height: 19px;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .page-container {
+    width: 95%;
+    margin: 15px auto;
+  }
+
+  .header-card mat-card-title {
+    font-size: 18px;
+  }
+
+  .clientes-table th,
+  .clientes-table td {
+    font-size: 12px;
+  }
+
+}

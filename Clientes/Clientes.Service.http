@@ -48,3 +48,7 @@ Content-Type: application/json
 
 ###
 
+
+GET {{Clientes.Service_HostAddress}}/api/clientes
+
+###

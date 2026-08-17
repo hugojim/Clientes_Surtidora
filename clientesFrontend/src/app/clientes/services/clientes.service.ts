@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Cliente } from '../models/cliente';
-import { ResponseAPI } from '../models/ResponseAPI';
 import { ClienteRequest } from '../models/ClienteRequest';
 
 @Injectable({
@@ -26,14 +25,14 @@ export class ClientesService {
   public crearCliente(objeto:Cliente)
   {
     console.log(objeto)
-     return this.http.post<ResponseAPI>(this.URLbase,objeto);
+     return this.http.post<void>(this.URLbase,objeto);
   } 
 public editarCliente(objeto:ClienteRequest ,id: number)
   {
-     return this.http.put<ResponseAPI>(`${this.URLbase}/${id}`,objeto);
+     return this.http.put<void>(`${this.URLbase}/${id}`,objeto);
   } 
    public eliminarCliente(id:Number)
   {
-     return this.http.delete<ResponseAPI>(`${this.URLbase}/${id}`);
+     return this.http.delete<void>(`${this.URLbase}/${id}`);
   } 
 }

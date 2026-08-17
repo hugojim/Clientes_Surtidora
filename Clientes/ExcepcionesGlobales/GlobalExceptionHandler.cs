@@ -21,7 +21,7 @@ namespace Clientes.Service.ExcepcionesGlobales
             _logger = logger;
         }
 
-        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public  async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
             _logger.LogError(exception, "An unhandled exception occurred.");
             var errorResponse = new ErrorResponse
@@ -31,6 +31,16 @@ namespace Clientes.Service.ExcepcionesGlobales
 
             switch (exception)
             {
+                case BusinessException businessException:   
+
+                    errorResponse.CodigoEstado =
+                        (int)businessException.StatusCode;
+
+                    errorResponse.Titulo =
+                        businessException.GetType().Name;
+
+                    break;
+
                 case BadHttpRequestException:
                     errorResponse.CodigoEstado = (int)HttpStatusCode.BadRequest;
                     errorResponse.Titulo = exception.GetType().Name;

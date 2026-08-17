@@ -12,21 +12,20 @@ namespace Clientes.BusinessLogic.Commands
         public int ClienteId{ get; set; }
         public string Nombre { get; set; } = null!;
 
-        public string ApellidoPaterno { get; set; } = null!;
+        public string ApellidoPaterno { get; set; } = string.Empty;
 
-        public string? ApellidoMaterno { get; set; }
+        public string ApellidoMaterno { get; set; } = string.Empty;
 
-        public string CorreoElectronico { get; set; } = null!;
+        public string CorreoElectronico { get; set; } = string.Empty;
 
-        public string? Telefono { get; set; }
+        public string Telefono { get; set; } = string.Empty;
 
-        public DateOnly? FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
-        public string? Direccion { get; set; }
+        public string Direccion { get; set; } = string.Empty;
 
-        public string Ciudad { get; set; } = null!;
-
-        public string? CodigoPostal { get; set; }
+        public string Ciudad { get; set; } = string.Empty;
+        public string CodigoPostal { get; set; } = string.Empty;
 
         public bool Activo { get; set; }
     }

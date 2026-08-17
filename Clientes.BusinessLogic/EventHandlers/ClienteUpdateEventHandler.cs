@@ -1,4 +1,5 @@
 ﻿using Clientes.BusinessLogic.Commands;
+using Clientes.BusinessLogic.Common;
 using Clientes.DataAccess.Entidades;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
 
             if (clienteActualizar == null)
             {
-                throw new MissingFieldException("No se encontro el cliente a actualizar");
+                throw new ClienteNoEncontradoException("No se encontro el cliente a actualizar");
             }
 
             var correoDuplicado = await _context.Clientes
@@ -39,7 +40,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
 
             if (correoDuplicado != null)
             {
-                throw new DuplicateNameException("Correo Duplicado"); // 409
+                throw new CorreoDuplicadoException("Correo Duplicado"); // 409
             }
 
             clienteActualizar.Nombre = clienteCommand.Nombre;
@@ -47,7 +48,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
             clienteActualizar.ApellidoMaterno = clienteCommand.ApellidoMaterno;
             clienteActualizar.CorreoElectronico = clienteCommand.CorreoElectronico;
             clienteActualizar.Telefono = clienteCommand.Telefono;
-            clienteActualizar.FechaNacimiento = clienteCommand.FechaNacimiento;
+            clienteActualizar.FechaNacimiento = DateOnly.FromDateTime(clienteCommand.FechaNacimiento);
             clienteActualizar.Direccion = clienteCommand.Direccion;
             clienteActualizar.Ciudad = clienteCommand.Ciudad;
             clienteActualizar.CodigoPostal = clienteCommand.CodigoPostal;

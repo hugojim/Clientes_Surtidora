@@ -19,19 +19,19 @@ namespace Clientes.BusinessLogic.Commands
         public string ApellidoPaterno { get; set; } = null!;
         
         [MaxLength(100)]
-        public string? ApellidoMaterno { get; set; } = string.Empty;
+        public string ApellidoMaterno { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress(ErrorMessage = "Correo electronico invalido")]
         [MaxLength(200)]
-        public string CorreoElectronico { get; set; } = null!;
+        public string CorreoElectronico { get; set; } = string.Empty;
         [Phone]
         [MaxLength(20)]
-        public string? Telefono { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
 
-        public DateOnly? FechaNacimiento { get; set; } = DateOnly.MinValue;
+        public DateTime FechaNacimiento { get; set; } 
         [MaxLength(250)]
-        public string? Direccion { get; set; } = string.Empty;
+        public string Direccion { get; set; } = string.Empty;
         [MaxLength(100)]
         public string Ciudad { get; set; } = string.Empty;
         [MaxLength(10)]
