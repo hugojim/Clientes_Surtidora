@@ -41,7 +41,11 @@ namespace Clientes.Service.ExcepcionesGlobales
                     errorResponse.Titulo = exception.GetType().Name;
                     break;
 
-                                 
+
+                case InvalidDataException:
+                    errorResponse.CodigoEstado = (int)HttpStatusCode.BadRequest;
+                    errorResponse.Titulo = exception.GetType().Name;
+                    break;
 
                 case MissingFieldException:
                     errorResponse.CodigoEstado = (int)HttpStatusCode.NotFound;

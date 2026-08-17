@@ -25,8 +25,26 @@ Content-Type: application/json
 
 ###
 
-DELETE {{Clientes.Service_HostAddress}}/api/clientes/{id}
+DELETE {{Clientes.Service_HostAddress}}/api/clientes/3
 
 ###
 
+
+
+PUT {{Clientes.Service_HostAddress}}/api/clientes/2
+Content-Type: application/json
+
+{
+      "nombre": "Laurasds",
+  "apellidoPaterno": "Martdfísanez",
+  "apellidoMaterno": "Gómez",
+  "correoElectronico": "laura.ez@correo.com",
+  "telefono": "3312345678",
+  "fechaNacimiento": "1990-05-18T00:00:00",
+  "direccion": "Av. Vallarta 1500",
+  "ciudad": "Guadalajara",
+  "codigoPostal": "44110"
+}
+
+###
 

@@ -34,7 +34,10 @@ namespace Clientes.BusinessLogic.EvenHandlers
             {
                 throw new DuplicateNameException("Correo Duplicado"); // 409
             }
-            if(ClienteValidaciones.EsFechaNacimientoFutura(clienteCommand.FechaNacimiento))
+            if (ClienteValidaciones.EsFechaNacimientoFutura(clienteCommand.FechaNacimiento))
+            {
+                throw new InvalidDataException("Fecha nacimiento no valida");
+            }
 
             await _context.Clientes.AddAsync(new Cliente
             {

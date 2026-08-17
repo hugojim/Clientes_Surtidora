@@ -12,26 +12,6 @@ namespace Clientes.BusinessLogic.Common
     {
 
 
-        //Validacion Correo electronico
-
-        public static bool EsCorreoElectronicoValido(string correoElectronico)
-        {
-            var trimmedEmail = correoElectronico.Trim();
-
-            if (trimmedEmail.EndsWith("."))
-            {
-                return false;
-            }
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(correoElectronico);
-                return addr.Address == trimmedEmail;
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         //Fecha nacimiento futura
 
