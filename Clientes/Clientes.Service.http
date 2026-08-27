@@ -79,13 +79,13 @@ DELETE {{Clientes.Service_HostAddress}}/api/productos/2
 
 ###
 
-PUT {{Clientes.Service_HostAddress}}/api/productos/{id}
+PUT {{Clientes.Service_HostAddress}}/api/productos/2
 Content-Type: application/json
 
 {
  "Nombre" : "Cofsmputadora",
 
- "Cantidad" :5,
+ "Cantidad" :10,
 
  "Precio": 50
 }
