@@ -52,3 +52,42 @@ Content-Type: application/json
 GET {{Clientes.Service_HostAddress}}/api/clientes
 
 ###
+
+POST {{Clientes.Service_HostAddress}}/api/productos
+Content-Type: application/json
+
+{
+ "Nombre" : "Cofsmputadora",
+
+ "Cantidad" :5,
+
+ "Precio": 50
+}
+
+###
+
+GET {{Clientes.Service_HostAddress}}/api/productos
+
+###
+
+@id=0
+GET {{Clientes.Service_HostAddress}}/api/productos/2
+
+###
+
+DELETE {{Clientes.Service_HostAddress}}/api/productos/2
+
+###
+
+PUT {{Clientes.Service_HostAddress}}/api/productos/{id}
+Content-Type: application/json
+
+{
+ "Nombre" : "Cofsmputadora",
+
+ "Cantidad" :5,
+
+ "Precio": 50
+}
+
+###

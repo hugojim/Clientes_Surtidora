@@ -1,32 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clientes.DataAccess.Entidades;
 
-public partial class ClientesDbContext : DbContext
+public partial class ClientesdbContext : DbContext
 {
-
-    //public Startup(IConfiguration configuration)
-    //{
-    //    Configuration = configuration;
-    //}
-
-    //public IConfiguration Configuration { get; }
-    public ClientesDbContext()
+    public ClientesdbContext()
     {
     }
 
-    public ClientesDbContext(DbContextOptions<ClientesDbContext> options)
+    public ClientesdbContext(DbContextOptions<ClientesdbContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //    => optionsBuilder.UseSqlServer( this.confiEnvironment.builder.Configuration.GetConnectionString("SQLConnection")));
+    public virtual DbSet<Producto> Productos { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=(local); Database=Clientesdb; Trusted_Connection=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +39,15 @@ public partial class ClientesDbContext : DbContext
             entity.Property(e => e.FechaRegistro).HasDefaultValueSql("(sysdatetime())");
             entity.Property(e => e.Nombre).HasMaxLength(100);
             entity.Property(e => e.Telefono).HasMaxLength(20);
+        });
+
+        modelBuilder.Entity<Producto>(entity =>
+        {
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Precio).HasColumnType("decimal(4, 2)");
         });
 
         OnModelCreatingPartial(modelBuilder);

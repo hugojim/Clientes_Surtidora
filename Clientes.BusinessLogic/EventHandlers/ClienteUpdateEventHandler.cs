@@ -14,9 +14,9 @@ namespace Clientes.BusinessLogic.EvenHandlers
 {
     public class ClienteUpdateEventHandler : INotificationHandler<ClienteUpdateCommand>
     {
-        private readonly ClientesDbContext _context;
+        private readonly ClientesdbContext _context;
 
-        public ClienteUpdateEventHandler(ClientesDbContext context)
+        public ClienteUpdateEventHandler(ClientesdbContext context)
         {
             _context = context;
         }

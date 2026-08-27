@@ -10,9 +10,9 @@ namespace Clientes.BusinessLogic
 {
     public class ClienteQueryService : IClienteQueryService
     {
-        private readonly ClientesDbContext _clientesDbContext;
+        private readonly ClientesdbContext _clientesDbContext;
 
-        public ClienteQueryService(ClientesDbContext clientesDbContext)
+        public ClienteQueryService(ClientesdbContext clientesDbContext)
         {
             _clientesDbContext = clientesDbContext;
         }

@@ -14,8 +14,8 @@ namespace Clientes.BusinessLogic.EvenHandlers
 {
     public class ClienteDeleteEventHandler :INotificationHandler<ClienteDeleteCommand>
     {
-        private readonly ClientesDbContext _context;
-        public ClienteDeleteEventHandler(ClientesDbContext context)
+        private readonly ClientesdbContext _context;
+        public ClienteDeleteEventHandler(ClientesdbContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
         {
             var clienteEliminar = await _context.Clientes
                  .AsNoTracking()
-                .Where(x=> x.ClienteId ==  clienteCommand.ClienteId)
+                .Where(x=> x. ClienteId ==  clienteCommand.ClienteId)
                 .FirstOrDefaultAsync();
 
             if (clienteEliminar == null)
@@ -35,7 +35,7 @@ namespace Clientes.BusinessLogic.EvenHandlers
             clienteEliminar.Activo = false;
             clienteEliminar.FechaModificacion = DateTime.Now;
 
-            _context.Update(clienteEliminar);
+            _context.Clientes.Update(clienteEliminar);
             await _context.SaveChangesAsync();
         }
     }

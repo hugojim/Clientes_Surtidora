@@ -17,10 +17,10 @@ namespace Clientes.BusinessLogic.EvenHandlers
 {
     public class ClienteCreateEventHandler :INotificationHandler<ClienteCreateCommand>
     {
-        private readonly ClientesDbContext _context;
+        private readonly ClientesdbContext _context;
 
 
-        public ClienteCreateEventHandler(ClientesDbContext context)
+        public ClienteCreateEventHandler(ClientesdbContext context)
         {
             _context = context;
         }
